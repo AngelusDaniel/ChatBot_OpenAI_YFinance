@@ -1,16 +1,19 @@
 import json
+import os
+from time import strftime
 
 import openai
 import yfinance as yf
-from dotenv import find_dotenv, load_dotenv
+from dotenv import load_dotenv
 
-import streamlit as st
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
 
-# Carregar variáveis de ambiente
-_ = load_dotenv(find_dotenv())
+# Define a chave da API do OpenAI a partir das variáveis de ambiente
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Configuração do cliente OpenAI
-client = openai.Client()
+# Inicializa o cliente da API do OpenAI
+client = openai.OpenAI()
 
 # Função para buscar cotações
 def retorna_cotacao(ticker, periodo="1mo"):
